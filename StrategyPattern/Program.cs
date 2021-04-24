@@ -1,4 +1,5 @@
 ﻿using Strategy_Pattern_First_Look.Business.Models;
+using StrategyPattern.Business.Strategies.Invoice;
 using StrategyPattern.Business.Strategies.SalesTax;
 using System;
 
@@ -23,6 +24,9 @@ namespace Strategy_Pattern_First_Look
             order.LineItems.Add(new Item("CONSULTING", "Building a website", 100m, ItemType.Service), 1);
 
             Console.WriteLine(order.GetTax(new SwedenSalesTaxStrategy()));
+
+            order.InvoiceStrategy = new FileInvoiceStrategy();
+            order.FinalizeOrder();
         }
     }
 }
