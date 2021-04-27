@@ -1,8 +1,10 @@
 ﻿using Strategy_Pattern_First_Look.Business.Models;
+using StrategyPattern.Business.Strategies.Comparer;
 using StrategyPattern.Business.Strategies.Invoice;
 using StrategyPattern.Business.Strategies.SalesTax;
 using StrategyPattern.Business.Strategies.Shipping;
 using System;
+using System.Collections.Generic;
 
 namespace Strategy_Pattern_First_Look
 {
@@ -59,6 +61,61 @@ namespace Strategy_Pattern_First_Look
             Console.WriteLine(order.GetTax());
 
             order.FinalizeOrder();
+
+            SortandPrintOrders();
+        }
+
+        private static void SortandPrintOrders()
+        {
+            var orders = new[] {
+                new Order
+                {
+                    ShippingDetails = new ShippingDetails
+                    {
+                        OriginCountry = "Sweden"
+                    }
+                },
+                new Order
+                {
+                    ShippingDetails = new ShippingDetails
+                    {
+                        OriginCountry = "USA"
+                    }
+                },
+                new Order
+                {
+                    ShippingDetails = new ShippingDetails
+                    {
+                        OriginCountry = "Sweden"
+                    }
+                },
+                new Order
+                {
+                    ShippingDetails = new ShippingDetails
+                    {
+                        OriginCountry = "USA"
+                    }
+                },
+                new Order
+                {
+                    ShippingDetails = new ShippingDetails
+                    {
+                        OriginCountry = "Singapore"
+                    }
+                }
+            };
+
+            foreach (var order in orders)
+                Console.WriteLine(order.ShippingDetails.OriginCountry);
+
+            Console.WriteLine();
+            Console.WriteLine("Sorting..");
+            Console.WriteLine();
+
+            Array.Sort(orders, new OrderAmountComparer());
+
+            foreach (var order in orders)
+                Console.WriteLine(order.ShippingDetails.OriginCountry);
         }
 
         private static IInvoiceStrategy GetInvoiceStrategyFor(int option)
