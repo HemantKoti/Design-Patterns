@@ -97,4 +97,4 @@ For this reason, the best implementation in terms of speed and allocation is the
 
 ## References
 
-[Singleton](https://www.c-sharpcorner.com/UploadFile/8911c4/singleton-design-pattern-in-C-Sharp/)
+[Singleton](https://csharpindepth.com/articles/singleton)
